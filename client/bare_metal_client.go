@@ -108,7 +108,7 @@ type BareMetalClient interface {
 
 	InstanceAction(id string, action baremetal.InstanceActions, opts *baremetal.HeaderOptions) (inst *baremetal.Instance, e error)
 
-	LaunchDBSystem(availabilityDomain, compartmentID, shape, subnetID string, sshPublicKeys []string, cpuCoreCount uint64, opts *baremetal.LaunchDBSystemOptions) (res *baremetal.DBSystem, e error)
+	LaunchDBSystem(availabilityDomain string, compartmentID string, cpuCoreCount uint64, databaseEdition baremetal.DatabaseEdition, dbHome baremetal.CreateDBHomeDetails, hostname string, shape string, sshPublicKeys []string, subnetID string, opts *baremetal.LaunchDBSystemOptions) (res *baremetal.DBSystem, e error)
 	LaunchInstance(availabilityDomain, compartmentID, image, shape, subnetID string, opts *baremetal.LaunchInstanceOptions) (inst *baremetal.Instance, e error)
 
 	ListAPIKeys(userID string) (response *baremetal.ListAPIKeyResponses, e error)
