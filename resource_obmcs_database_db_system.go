@@ -287,21 +287,24 @@ func (s *DBSystemResourceCrud) Create() (e error) {
 		if displayName != nil {
 			dbHomeOpts.DisplayName = displayName.(string)
 		}
+		dbOpts := &baremetal.CreateDatabaseOptions{}
 		if dbWorkload != nil {
-			dbHomeOpts.DBWorkload = dbWorkload.(string)
+			dbOpts.DBWorkload = dbWorkload.(string)
 		}
 		if characterSet != nil {
-			dbHomeOpts.CharacterSet = characterSet.(string)
+			dbOpts.CharacterSet = characterSet.(string)
 		}
 		if ncharacterSet != nil {
-			dbHomeOpts.NCharacterSet = ncharacterSet.(string)
+			dbOpts.NCharacterSet = ncharacterSet.(string)
 		}
 		if pdbName != nil {
-			dbHomeOpts.PDBName = pdbName.(string)
+			dbOpts.PDBName = pdbName.(string)
 		}
 
 		dbHomeDetails = baremetal.NewCreateDBHomeDetails(
-			adminPassword, dbName, dbVersion, dbHomeOpts,
+			baremetal.NewCreateDatabaseDetails(adminPassword, dbName, dbOpts),
+			dbVersion,
+			dbHomeOpts,
 		)
 	}
 
